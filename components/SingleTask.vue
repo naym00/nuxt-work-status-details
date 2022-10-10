@@ -7,8 +7,8 @@
           <div style="width:55px;"><b>Deadline:</b></div>
           <div style="width:110px;">{{getDateTimeHR(item.deadline)}}</div>
           <div style="width:15px;"><SingleTaskDialog :item="item"></SingleTaskDialog></div>
-          <div style="width:25px;"><v-btn icon><v-icon>mdi-pencil</v-icon></v-btn></div>
-          <div style="width:25px;"><v-btn icon><v-icon>mdi-delete</v-icon></v-btn></div>
+          <div style="width:25px;"><v-btn icon @click="updateTask(item)"><v-icon>mdi-pencil</v-icon></v-btn></div>
+          <div style="width:25px;"><v-btn icon @click="deleteTask(item)"><v-icon>mdi-delete</v-icon></v-btn></div>
         </div>
         
       </div>
@@ -34,6 +34,12 @@
         }
         else return `${dateOb.toDateString()}`
         
+      },
+      deleteTask(item){
+        this.$emit('deleteTask', item)
+      },
+      updateTask(item){
+        this.$emit('updateTask', item)
       }
     }
     

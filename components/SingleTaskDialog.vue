@@ -5,6 +5,7 @@
         <v-btn small icon v-bind="attrs" v-on="on"><v-icon>mdi-eye</v-icon></v-btn>
       </template>
       <v-card>
+        
         <v-card-title>
           <span class="text-h5">{{item.title}}</span>
         </v-card-title>
@@ -39,9 +40,8 @@
           </div>
         </div>
 
-        <!-- <v-card-text>Test: {{item.stateChangeDetails.info}}</v-card-text> -->
-
-        <DataTable v-if="item.stateChangeDetails.info" :headers="[{text: 'Developer', value: 'developer' },{ text: 'Duration', value: 'duration' }]" :items="item.stateChangeDetails.info"></DataTable>
+        <DataTable :headers="[{text: 'Developer', value: 'developer' },{text: 'Stage', value: 'switch' },{ text: 'Duration', value: 'duration' }]" :items="item.stateChangeDetails.info"></DataTable>
+        <v-card-text>Total Time: {{item.stateChangeDetails.hmnReadFormat}}</v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>

@@ -6,8 +6,15 @@
       </template>
       <v-card>
         
-        <v-card-title>
-          <span class="text-h5">{{item.title}}</span>
+        <v-card-title class="d-flex flex-row justify-center">
+          <span class="display-1">{{item.title}}</span>
+
+          <v-chip class="ma-2" color="green" text-color="white">
+            Stage
+            <v-avatar right class="green darken-4">{{item.stage.split('-')[1]}}</v-avatar>
+          </v-chip>
+          
+
         </v-card-title>
 
         <v-card-text>{{item.description}}</v-card-text>

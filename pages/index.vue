@@ -328,7 +328,7 @@ export default {
 <style scoped lang="scss">
 .div-container{
   width: 250px;
-  height: 470px;
+  min-height: 470px;
   margin: 10px; 
   background-color:#dce3da;
 }

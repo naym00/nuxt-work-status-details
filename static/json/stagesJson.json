@@ -1,0 +1,10 @@
+{
+    "nextId": 5,
+    "data": [
+      { "id": 1, "stage": "Stage-1" },
+      { "id": 2, "stage": "Stage-2" },
+      { "id": 3, "stage": "Stage-3" },
+      { "id": 4, "stage": "Stage-4" }
+    ]
+  }
+  

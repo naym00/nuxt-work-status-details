@@ -8,14 +8,22 @@
         </template>
 
         <v-card>
-          <v-card-title><span class="text-h5">Assign Task</span></v-card-title>
+          <v-card-title><span class="text-h5">New Task</span></v-card-title>
           <v-card-text>
             <v-container>
               <v-row>
 
-                <v-col cols="12">
+                <v-col cols="12" sm="4">
                   <v-text-field v-model="title" label="Task Title*" required></v-text-field>
                 </v-col>
+                <v-col cols="12" sm="4">
+                  <v-select v-model="projectId" item-value="id" :items="projects" item-text="title" label="Select Project"></v-select>
+                </v-col>
+                <v-col cols="12" sm="4">
+                  <v-select v-model="importanceId" item-value="id" :items="projectImportance" item-text="level" label="Importance Level"></v-select>
+                </v-col>
+
+
 
                 <v-col cols="12">
                   <v-text-field v-model="description" label="Description*" required></v-text-field>
@@ -35,11 +43,11 @@
                 </v-col>
 
                 <v-col cols="12" sm="4">
-                  <v-select v-model="developer" :items="['Developer-1', 'Developer-2', 'Developer-3', 'Developer-4']" label="Select Developer" required></v-select>
+                  <v-select v-model="developer" :items="developersJson" item-text="developer" label="Select Developer" required></v-select>
                 </v-col>
 
                 <v-col cols="12" sm="4">
-                  <v-select v-model="stage" :items="['Stage-1', 'Stage-2', 'Stage-3', 'Stage-4']" label="Select Stage" required></v-select>
+                  <v-select v-model="stage" :items="stagesJson" item-text="stage" label="Select Stage" required></v-select>
                 </v-col>
 
               </v-row>
@@ -54,6 +62,9 @@
 
         </v-card>
       </v-dialog>
+
+      <AddNewProject @newproject="newProjectDetails($event)"></AddNewProject>
+      <TaskEditDialog></TaskEditDialog>
 
 
       <v-dialog v-model="dialog2" max-width="600px">
@@ -87,10 +98,6 @@
                   <v-select v-model="updateDeveloper" :items="['Developer-1', 'Developer-2', 'Developer-3', 'Developer-4']" label="Select Developer" required></v-select>
                 </v-col>
 
-                <!-- <v-col cols="12" sm="4">
-                  <v-select v-model="updateStage" :items="['Stage-1', 'Stage-2', 'Stage-3', 'Stage-4']" label="Select Stage" required></v-select>
-                </v-col> -->
-
               </v-row>
             </v-container>
           </v-card-text>
@@ -107,58 +114,97 @@
 
 
     </div>
-    <div class="d-flex flex-row flex-wrap justify-space-around" style="background-color: #CCFFE5; height:100%">
+    <div class="d-flex flex-row flex-wrap justify-space-around" style="height:100%">
 
       <div class="d-flex flex-column">
-        <div class="title d-flex justify-center">Stage 1</div>
+        <div class="d-flex flex-row align-center">
+          <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
+            Stage-1
+            <v-avatar right class="green darken-2">{{tasks.stage1.length}}</v-avatar>
+          </v-chip>
+        </div>
+
+        
+
+
         <draggable class="div-container" :list="tasks.stage1" group="tasks" @change="log($event, 1)">
           <SingleTask v-for="(task, index) in tasks.stage1" :key="index" :item="task" @deleteTask="deleteTask($event)" @updateTask="updateTask($event)"></SingleTask>
         </draggable>
       </div>
 
       <div class="d-flex flex-column">
-        <div class="title d-flex justify-center">Stage 2</div>
+        <div class="d-flex flex-row align-center">
+          <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
+            Stage-2
+            <v-avatar right class="green darken-2">{{tasks.stage2.length}}</v-avatar>
+          </v-chip>
+        </div>
+
         <draggable class="div-container" :list="tasks.stage2" group="tasks" @change="log($event, 2)">
           <SingleTask v-for="(task, index) in tasks.stage2" :key="index" :item="task" @deleteTask="deleteTask($event)"></SingleTask>
         </draggable>
       </div>
 
       <div class="d-flex flex-column">
-        <div class="title d-flex justify-center">Stage 3</div>
+        <div class="d-flex flex-row align-center">
+          <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
+            Stage-3
+            <v-avatar right class="green darken-2">{{tasks.stage3.length}}</v-avatar>
+          </v-chip>
+        </div>
+
         <draggable class="div-container" :list="tasks.stage3" group="tasks" @change="log($event, 3)">
           <SingleTask v-for="(task, index) in tasks.stage3" :key="index" :item="task" @deleteTask="deleteTask($event)"></SingleTask>
         </draggable>
       </div>
 
       <div class="d-flex flex-column">
-        <div class="title d-flex justify-center">Stage 4</div>
+        <div class="d-flex flex-row align-center">
+          <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
+            Stage-3
+            <v-avatar right class="green darken-2">{{tasks.stage4.length}}</v-avatar>
+          </v-chip>
+        </div>
+
         <draggable class="div-container" :list="tasks.stage4" group="tasks" @change="log($event, 4)">
           <SingleTask v-for="(task, index) in tasks.stage4" :key="index" :item="task" @deleteTask="deleteTask($event)"></SingleTask>
         </draggable>
       </div>
     
     </div>
-
     
   </v-container>
 </template>
 
 <script>
+import projectsJson from '~/static/json/projects.json'
 import taskJson from '~/static/json/task.json'
+import importanceLevel from '~/static/json/importanceLevel.json'
+import developersJson from '~/static/json/developersJson.json'
+import stagesJson from '~/static/json/stagesJson.json'
 import draggable from "vuedraggable";
+import moment from "moment"
 
 export default {
   name: 'IndexPage',
   components: { draggable },
   data(){
     return {
+      projects: JSON.parse(JSON.stringify(projectsJson)).data,
+      projectsId: JSON.parse(JSON.stringify(projectsJson)).nextId,
+
+      projectImportance: JSON.parse(JSON.stringify(importanceLevel)).data,
+      developersJson: JSON.parse(JSON.stringify(developersJson)).data,
+      stagesJson: JSON.parse(JSON.stringify(stagesJson)).data,
       tasks: JSON.parse(JSON.stringify(taskJson)).data,
-      lastIndex: JSON.parse(JSON.stringify(taskJson)).nextIndex,
+      lastId: JSON.parse(JSON.stringify(taskJson)).lastId,
       stateChanged: [],
 
       dialog: false,
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       title: '',
+      projectId: -1,
+      importanceId: -1,
       description: '',
       developer: '',
       stage: '',
@@ -185,8 +231,8 @@ export default {
           temOb.stage = `Stage-${this.stateChanged[0].stage}`
           temOb.stateChanged[`Stage${this.stateChanged[0].stage}`] += 1
 
-          let rightNow = new Date(this.getDateTime())
-          temOb.stateChangeDetails.totalTime += this.timeDifference(rightNow, temOb.stateChangeDetails.time, false)
+          let rightNow = moment().format('YYYY-MM-D h:mm:ss A')
+          temOb.stateChangeDetails.totalTime += moment.duration(moment(rightNow).diff(moment(temOb.stateChangeDetails.time))).asSeconds()
           temOb.stateChangeDetails.hmnReadFormat = this.convertToDuration(temOb.stateChangeDetails.totalTime)
           temOb.stateChangeDetails.info.push({developer: temOb.assignedTo, switch: `Stage-${this.stateChanged[1].stage} -- Stage-${this.stateChanged[0].stage}`, duration: this.timeDifference(rightNow, temOb.stateChangeDetails.time, true)})
           temOb.stateChangeDetails.time = rightNow
@@ -251,28 +297,44 @@ export default {
     },
 
     addNewTask(){
-      let formatedDateDeadline =  `${(new Date(this.date)).toString().split('+')[0]}+0600 (Bangladesh Standard Time)`
-      let createdTime = new Date(this.getDateTime())
+      let rightNow = moment().format('YYYY-MM-D h:mm:ss A')
+
+      let selectedProject = {}
+      this.projects.forEach(project => {
+        if(project.id == this.projectId) selectedProject = project
+      })
+
+      let selectedImportance = {}
+      this.projectImportance.forEach(importance => {
+        if(importance.id == this.importanceId) selectedImportance = importance
+      })
+
+      // let selectedProject = this.findObject(this.projects, 'id', this.projectId)
+      // let selectedImportance = this.projectImportance(this.projects, 'id', this.importanceId)
+
+    
       let newTask = {
-                        id: `${this.lastIndex}`,
+                        id: `${this.lastId}`,
                         title: `${this.title}`,
                         description: `${this.description}`,
-                        createdAt: `${createdTime}`,
-                        updatedAt: `${createdTime}`,
+                        createdAt: `${rightNow}`,
+                        updatedAt: `${rightNow}`,
+
+                        project: selectedProject,
+                        importance: selectedImportance,
+
                         uddateDetails: [
-                          { developer: `${this.developer}`, time: `${createdTime}` }
+                          { developer: `${this.developer}`, time: `${rightNow}` }
                         ],
-                        deadline: `${formatedDateDeadline}`,
+                        deadline: `${this.date} 11:59:59 PM`,
                         deadlineDetails: [],
                         stage: `${this.stage}`,
                         stateChanged: { Stage1: `${this.stage == 'Stage-1' ? 1 : 0}`, Stage2: `${this.stage == 'Stage-2' ? 1 : 0}`, Stage3: `${this.stage == 'Stage-3' ? 1 : 0}`, Stage4: `${this.stage == 'Stage-4' ? 1 : 0}` },
-                        stateChangeDetails: {time: `${createdTime}`, totalTime: 0, hmnReadFormat: "", info: []},
+                        stateChangeDetails: {time: `${rightNow}`, totalTime: 0, hmnReadFormat: "", info: []},
                         assignedTo: `${this.developer}`
                       }
       
-      this.lastIndex += 1
-      // this.title = ''
-      // this.description = ''
+      this.lastId += 1
       if(this.stage == 'Stage-1') { this.tasks.stage1.push(newTask)}
       else if(this.stage == 'Stage-2') { this.tasks.stage2.push(newTask)}
       else if(this.stage == 'Stage-3') { this.tasks.stage3.push(newTask)}
@@ -281,6 +343,18 @@ export default {
       this.dialog = false
       
     },
+    newProjectDetails(newProject){
+      this.projects.push({...newProject, ...{id: this.projectsId}})
+      this.projectsId += 1
+    },
+
+    // findObject(object, key, toCompare){
+    //   let selectedobject = {}
+    //   object.forEach(item => {
+    //     if(item[key] == toCompare) selectedobject = item
+    //   })
+    //   return selectedobject
+    // },
 
     timeDifference(date1, date2, flag){
       let secondsDifference =((new Date(date1)).getTime() - (new Date(date2)).getTime()) / 1000;
@@ -330,6 +404,6 @@ export default {
   width: 250px;
   min-height: 470px;
   margin: 10px; 
-  background-color:#dce3da;
+  // background-color:#dce3da;
 }
 </style>

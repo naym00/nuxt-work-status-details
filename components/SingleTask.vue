@@ -1,14 +1,22 @@
 <template>
     <v-container>
       
-      <div>
-        <div>{{item.id +' - '+ item.title}}</div>
-        <div class="d-flex flex-row" style="font-size: 12px">
-          <div style="width:55px;"><b>Deadline:</b></div>
-          <div style="width:110px;">{{getDateTimeHR(item.deadline)}}</div>
-          <div style="width:15px;"><SingleTaskDialog :item="item"></SingleTaskDialog></div>
+      <div class="teal lighten-5 rounded">
+        <div class="d-flex flex-row align-center">
+          <v-chip small style="width:100px;" class="mx-1" color="green" label text-color="white">
+            <v-avatar left class="green darken-2">{{item.id}}</v-avatar>
+            {{item.title}}
+          </v-chip>
+
+          <v-chip small style="width:180px;" class="mx-1" color="pink" label text-color="white">
+            <v-icon small left>mdi-calendar</v-icon>{{getDateTimeHR(item.deadline)}}
+          </v-chip>
+        </div>
+
+        <div class="d-flex flex-row align-center justify-space-around" style="font-size: 12px">
           <div style="width:25px;"><v-btn icon @click="updateTask(item)"><v-icon>mdi-pencil</v-icon></v-btn></div>
           <div style="width:25px;"><v-btn icon @click="deleteTask(item)"><v-icon>mdi-delete</v-icon></v-btn></div>
+          <div style="width:15px;"><SingleTaskDialog :item="item"></SingleTaskDialog></div>
         </div>
         
       </div>
@@ -17,23 +25,13 @@
   </template>
   
   <script>
+  import moment from "moment"
   export default {
     name: 'SingleTask',
     props: ['item'],
     methods:{
       getDateTimeHR(dateTime){
-        let [date, time] = dateTime.split(', ')
-
-        let [day, month, year] = date.split('/')
-
-        let dateOb = new Date(`${year}-${month}-${day}`)
-
-        if(time){
-          let [hour, minute, second] = time.split(':')
-          return `${dateOb.toDateString()} - ${hour}:${minute} ${second.split(' ')[1]}`
-        }
-        else return `${dateOb.toDateString()}`
-        
+        return moment(dateTime).format('LL')
       },
       deleteTask(item){
         this.$emit('deleteTask', item)

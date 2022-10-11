@@ -1,0 +1,8 @@
+{
+  "nextId": 4,
+  "data": [
+    { "id": 1, "level": "Low", "color": "secondary" },
+    { "id": 2, "level": "Medium", "color": "primary" },
+    { "id": 3, "level": "High", "color": "red" }
+  ]
+}

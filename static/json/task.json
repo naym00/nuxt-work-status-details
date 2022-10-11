@@ -1,86 +1,64 @@
 {
-  "nextIndex": 20,
+  "lastId": 10,
   "data": {
     "stage1": [
       {
         "id": 1,
         "title": "Task-1",
         "description": "Random Description for Task-1",
-        "createdAt": "Mon Oct 10 2015 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2015 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "createdAt": "2022-09-25 11:48:20 AM",
+        "updatedAt": "2022-09-25 11:48:20 AM",
+        "project": {
+          "id": 3,
+          "title": "Project 3",
+          "description": "Random Description For Project 3",
+          "createdAt": "2022-01-20 11:48:20 AM",
+          "deadlie": "2023-08-25 12:59:59 PM"
+        },
+        "importance": {"level": "Medium", "color": "primary"},
         "uddateDetails": [
-          { "developer": "Developer-1", "time": "Mon Oct 10 2015 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
+          { "developer": "Developer-1", "time": "2022-09-25 11:48:20 AM" }
         ],
-        "deadline": "Mon Oct 10 2023 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "deadline": "2022-12-25 11:48:20 AM",
         "deadlineDetails": [],
         "stage": "Stage-1",
         "stateChanged": { "Stage1": 1, "Stage2": 0, "Stage3": 0, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2015 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
+        "stateChangeDetails": {
+          "time": "2022-09-25 11:48:20 AM",
+          "totalTime": 0,
+          "hmnReadFormat": "",
+          "info": []
+        },
         "assignedTo": "Developer-1"
       },
       {
         "id": 4,
         "title": "Task-4",
         "description": "Random Description for Task-4",
-        "createdAt": "Mon Oct 10 2017 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2017 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "createdAt": "2022-08-12 11:48:20 AM",
+        "updatedAt": "2022-08-12 11:48:20 AM",
+        "project": {
+          "id": 6,
+          "title": "Project 6",
+          "description": "Random Description For Project 6",
+          "createdAt": "2022-01-20 11:48:20 AM",
+          "deadlie": "2023-08-25 12:59:59 PM"
+        },
+        "importance": {"level": "High", "color": "red"},
         "uddateDetails": [
-          { "developer": "Developer-2", "time": "Mon Oct 10 2017 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
+          { "developer": "Developer-2", "time": "2022-08-12 11:48:20 AM" }
         ],
-        "deadline": "Mon Oct 10 2025 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "deadline": "2022-11-12 11:48:20 AM",
         "deadlineDetails": [],
         "stage": "Stage-1",
         "stateChanged": { "Stage1": 1, "Stage2": 0, "Stage3": 0, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2017 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
+        "stateChangeDetails": {
+          "time": "2022-08-12 11:48:20 AM",
+          "totalTime": 0,
+          "hmnReadFormat": "",
+          "info": []
+        },
         "assignedTo": "Developer-2"
-      },
-      {
-        "id": 8,
-        "title": "Task-8",
-        "description": "Random Description for Task-8",
-        "createdAt": "Mon Oct 10 2016 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2016 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "uddateDetails": [
-          { "developer": "Developer-5", "time": "Mon Oct 10 2016 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
-        ],
-        "deadline": "Mon Oct 10 2024 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "deadlineDetails": [],
-        "stage": "Stage-1",
-        "stateChanged": { "Stage1": 1, "Stage2": 0, "Stage3": 0, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2016 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
-        "assignedTo": "Developer-5"
-      },
-      {
-        "id": 15,
-        "title": "Task-15",
-        "description": "Random Description for Task-15",
-        "createdAt": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "uddateDetails": [
-          { "developer": "Developer-5", "time": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
-        ],
-        "deadline": "Mon Oct 10 2024 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "deadlineDetails": [],
-        "stage": "Stage-1",
-        "stateChanged": { "Stage1": 1, "Stage2": 0, "Stage3": 0, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
-        "assignedTo": "Developer-5"
-      },
-      {
-        "id": 18,
-        "title": "Task-18",
-        "description": "Random Description for Task-18",
-        "createdAt": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "uddateDetails": [
-          { "developer": "Developer-6", "time": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
-        ],
-        "deadline": "Mon Oct 10 2023 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "deadlineDetails": [],
-        "stage": "Stage-1",
-        "stateChanged": { "Stage1": 1, "Stage2": 0, "Stage3": 0, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
-        "assignedTo": "Developer-6"
       }
     ],
     "stage2": [
@@ -88,81 +66,59 @@
         "id": 2,
         "title": "Task-2",
         "description": "Random Description for Task-2",
-        "createdAt": "Mon Oct 10 2018 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2018 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "createdAt": "2022-11-02 11:48:20 AM",
+        "updatedAt": "2022-11-02 11:48:20 AM",
+        "project": {
+          "id": 4,
+          "title": "Project 4",
+          "description": "Random Description For Project 4",
+          "createdAt": "2022-01-20 11:48:20 AM",
+          "deadlie": "2023-08-25 12:59:59 PM"
+        },
+        "importance": {"level": "Low", "color": "secondary"},
         "uddateDetails": [
-          { "developer": "Developer-2", "time": "Mon Oct 10 2018 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
+          { "developer": "Developer-2", "time": "2022-11-02 11:48:20 AM" }
         ],
-        "deadline": "Mon Oct 10 2024 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "deadline": "2023-02-25 11:48:20 AM",
         "deadlineDetails": [],
         "stage": "Stage-2",
         "stateChanged": { "Stage1": 0, "Stage2": 1, "Stage3": 0, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2018 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
+        "stateChangeDetails": {
+          "time": "2022-11-02 11:48:20 AM",
+          "totalTime": 0,
+          "hmnReadFormat": "",
+          "info": []
+        },
         "assignedTo": "Developer-2"
       },
       {
         "id": 3,
         "title": "Task-3",
         "description": "Random Description for Task-3",
-        "createdAt": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "createdAt": "2022-05-27 11:48:20 AM",
+        "updatedAt": "2022-05-27 11:48:20 AM",
+        "project": {
+          "id": 2,
+          "title": "Project 2",
+          "description": "Random Description For Project 2",
+          "createdAt": "2022-01-20 11:48:20 AM",
+          "deadlie": "2023-08-25 12:59:59 PM"
+        },
+        "importance": {"level": "High", "color": "red"},
         "uddateDetails": [
-          { "developer": "Developer-3", "time": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
+          { "developer": "Developer-3", "time": "2022-05-27 11:48:20 AM" }
         ],
-        "deadline": "Mon Oct 10 2024 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "deadline": "2022-10-27 11:48:20 AM",
         "deadlineDetails": [],
         "stage": "Stage-2",
         "stateChanged": { "Stage1": 0, "Stage2": 1, "Stage3": 0, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
+        "stateChangeDetails": {
+          "time": "2022-05-27 11:48:20 AM",
+          "totalTime": 0,
+          "hmnReadFormat": "",
+          "info": []
+        },
         "assignedTo": "Developer-3"
-      },
-      {
-        "id": 6,
-        "title": "Task-6",
-        "description": "Random Description for Task-6",
-        "createdAt": "Mon Oct 10 2014 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2014 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "uddateDetails": [
-          { "developer": "Developer-3", "time": "Mon Oct 10 2014 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
-        ],
-        "deadline": "Mon Oct 10 2023 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "deadlineDetails": [],
-        "stage": "Stage-2",
-        "stateChanged": { "Stage1": 0, "Stage2": 1, "Stage3": 0, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2014 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
-        "assignedTo": "Developer-3"
-      },
-      {
-        "id": 11,
-        "title": "Task-11",
-        "description": "Random Description for Task-11",
-        "createdAt": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "uddateDetails": [
-          { "developer": "Developer-1", "time": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
-        ],
-        "deadline": "Mon Oct 10 2023 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "deadlineDetails": [],
-        "stage": "Stage-2",
-        "stateChanged": { "Stage1": 0, "Stage2": 1, "Stage3": 0, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
-        "assignedTo": "Developer-1"
-      },
-      {
-        "id": 12,
-        "title": "Task-12",
-        "description": "Random Description for Task-12",
-        "createdAt": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "uddateDetails": [
-          { "developer": "Developer-5", "time": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
-        ],
-        "deadline": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "deadlineDetails": [],
-        "stage": "Stage-2",
-        "stateChanged": { "Stage1": 0, "Stage2": 1, "Stage3": 0, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
-        "assignedTo": "Developer-5"
       }
     ],
     "stage3": [
@@ -170,150 +126,178 @@
         "id": 5,
         "title": "Task-5",
         "description": "Random Description for Task-5",
-        "createdAt": "Mon Oct 10 2016 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2016 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "createdAt": "2022-09-16 11:48:20 AM",
+        "updatedAt": "2022-09-16 11:48:20 AM",
+        "project": {
+          "id": 9,
+          "title": "Project 9",
+          "description": "Random Description For Project 9",
+          "createdAt": "2022-01-20 11:48:20 AM",
+          "deadlie": "2023-08-25 12:59:59 PM"
+        },
+        "importance": {"level": "Medium", "color": "primary"},
         "uddateDetails": [
-          { "developer": "Developer-4", "time": "Mon Oct 10 2016 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
+          { "developer": "Developer-4", "time": "2022-09-16 11:48:20 AM" }
         ],
-        "deadline": "Mon Oct 10 2026 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "deadline": "2023-01-11 11:48:20 AM",
         "deadlineDetails": [],
         "stage": "Stage-3",
         "stateChanged": { "Stage1": 0, "Stage2": 0, "Stage3": 1, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2016 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
+        "stateChangeDetails": {
+          "time": "2022-09-16 11:48:20 AM",
+          "totalTime": 0,
+          "hmnReadFormat": "",
+          "info": []
+        },
         "assignedTo": "Developer-4"
       },
       {
         "id": 7,
         "title": "Task-7",
         "description": "Random Description for Task-7",
-        "createdAt": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "createdAt": "2022-10-11 10:48:20 AM",
+        "updatedAt": "2022-10-11 10:48:20 AM",
+        "project": {
+          "id": 8,
+          "title": "Project 8",
+          "description": "Random Description For Project 8",
+          "createdAt": "2022-01-20 11:48:20 AM",
+          "deadlie": "2023-08-25 12:59:59 PM"
+        },
+        "importance": {"level": "Low", "color": "secondary"},
         "uddateDetails": [
-          { "developer": "Developer-1", "time": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
+          { "developer": "Developer-1", "time": "2022-10-11 10:48:20 AM" }
         ],
-        "deadline": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "deadline": "2023-05-11 10:48:20 AM",
         "deadlineDetails": [],
         "stage": "Stage-3",
         "stateChanged": { "Stage1": 0, "Stage2": 0, "Stage3": 1, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2019 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
+        "stateChangeDetails": {
+          "time": "2022-10-11 10:48:20 AM",
+          "totalTime": 0,
+          "hmnReadFormat": "",
+          "info": []
+        },
         "assignedTo": "Developer-1"
       },
       {
         "id": 9,
         "title": "Task-9",
         "description": "Random Description for Task-9",
-        "createdAt": "Mon Oct 10 2020 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2020 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "createdAt": "2022-10-08 10:48:20 AM",
+        "updatedAt": "2022-10-08 10:48:20 AM",
+        "project": {
+          "id": 6,
+          "title": "Project 6",
+          "description": "Random Description For Project 6",
+          "createdAt": "2022-01-20 11:48:20 AM",
+          "deadlie": "2023-08-25 12:59:59 PM"
+        },
+        "importance": {"level": "High", "color": "red"},
         "uddateDetails": [
-          { "developer": "Developer-4", "time": "Mon Oct 10 2020 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
+          { "developer": "Developer-4", "time": "2022-10-08 10:48:20 AM" }
         ],
-        "deadline": "Mon Oct 10 2026 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "deadline": "2023-01-27 10:48:20 AM",
         "deadlineDetails": [],
         "stage": "Stage-3",
         "stateChanged": { "Stage1": 0, "Stage2": 0, "Stage3": 1, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2020 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
+        "stateChangeDetails": {
+          "time": "2022-10-08 10:48:20 AM",
+          "totalTime": 0,
+          "hmnReadFormat": "",
+          "info": []
+        },
         "assignedTo": "Developer-4"
-      },
-      {
-        "id": 10,
-        "title": "Task-10",
-        "description": "Random Description for Task-10",
-        "createdAt": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "uddateDetails": [
-          { "developer": "Developer-3", "time": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
-        ],
-        "deadline": "Mon Oct 10 2025 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "deadlineDetails": [],
-        "stage": "Stage-3",
-        "stateChanged": { "Stage1": 0, "Stage2": 0, "Stage3": 1, "Stage4": 0 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2022 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
-        "assignedTo": "Developer-3"
       }
     ],
     "stage4": [
       {
-        "id": 13,
-        "title": "Task-13",
-        "description": "Random Description for Task-13",
-        "createdAt": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "id": 4,
+        "title": "Task-4",
+        "description": "Random Description for Task-4",
+        "createdAt": "2022-05-08 10:48:20 AM",
+        "updatedAt": "2022-05-08 10:48:20 AM",
+        "project": {
+          "id": 5,
+          "title": "Project 5",
+          "description": "Random Description For Project 5",
+          "createdAt": "2022-01-20 11:48:20 AM",
+          "deadlie": "2023-08-25 12:59:59 PM"
+        },
+        "importance": {"level": "Medium", "color": "primary"},
         "uddateDetails": [
-          { "developer": "Developer-4", "time": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
+          { "developer": "Developer-4", "time": "2022-05-08 10:48:20 AM" }
         ],
-        "deadline": "Mon Oct 10 2024 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "deadline": "2022-12-29 10:48:20 AM",
         "deadlineDetails": [],
         "stage": "Stage-4",
         "stateChanged": { "Stage1": 0, "Stage2": 0, "Stage3": 0, "Stage4": 1 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
+        "stateChangeDetails": {
+          "time": "2022-05-08 10:48:20 AM",
+          "totalTime": 0,
+          "hmnReadFormat": "",
+          "info": []
+        },
         "assignedTo": "Developer-4"
       },
       {
-        "id": 14,
-        "title": "Task-14",
-        "description": "Random Description for Task-14",
-        "createdAt": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "id": 8,
+        "title": "Task-8",
+        "description": "Random Description for Task-8",
+        "createdAt": "2022-05-10 10:48:20 AM",
+        "updatedAt": "2022-05-10 10:48:20 AM",
+        "project": {
+          "id": 3,
+          "title": "Project 3",
+          "description": "Random Description For Project 3",
+          "createdAt": "2022-01-20 11:48:20 AM",
+          "deadlie": "2023-08-25 12:59:59 PM"
+        },
+        "importance": {"level": "Low", "color": "secondary"},
         "uddateDetails": [
-          { "developer": "Developer-3", "time": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
+          { "developer": "Developer-3", "time": "2022-05-10 10:48:20 AM" }
         ],
-        "deadline": "Mon Oct 10 2026 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "deadline": "2022-12-10 11:48:20 AM",
         "deadlineDetails": [],
         "stage": "Stage-4",
         "stateChanged": { "Stage1": 0, "Stage2": 0, "Stage3": 0, "Stage4": 1 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
+        "stateChangeDetails": {
+          "time": "2022-05-10 10:48:20 AM",
+          "totalTime": 0,
+          "hmnReadFormat": "",
+          "info": []
+        },
         "assignedTo": "Developer-3"
       },
       {
-        "id": 16,
-        "title": "Task-16",
-        "description": "Random Description for Task-16",
-        "createdAt": "Mon Oct 10 2015 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2015 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "id": 6,
+        "title": "Task-6",
+        "description": "Random Description for Task-6",
+        "createdAt": "2022-08-07 10:48:20 AM",
+        "updatedAt": "2022-08-07 10:48:20 AM",
+        "project": {
+          "id": 2,
+          "title": "Project 2",
+          "description": "Random Description For Project 2",
+          "createdAt": "2022-01-20 11:48:20 AM",
+          "deadlie": "2023-08-25 12:59:59 PM"
+        },
+        "importance": {"level": "High", "color": "red"},
         "uddateDetails": [
-          { "developer": "Developer-4", "time": "Mon Oct 10 2015 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
+          { "developer": "Developer-4", "time": "2022-08-07 10:48:20 AM" }
         ],
-        "deadline": "Mon Oct 10 2025 10:42:37 GMT+0600 (Bangladesh Standard Time)",
+        "deadline": "2023-01-19 10:48:20 AM",
         "deadlineDetails": [],
         "stage": "Stage-4",
         "stateChanged": { "Stage1": 0, "Stage2": 0, "Stage3": 0, "Stage4": 1 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2015 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
+        "stateChangeDetails": {
+          "time": "2022-08-07 10:48:20 AM",
+          "totalTime": 0,
+          "hmnReadFormat": "",
+          "info": []
+        },
         "assignedTo": "Developer-4"
-      },
-      {
-        "id": 17,
-        "title": "Task-17",
-        "description": "Random Description for Task-17",
-        "createdAt": "Mon Oct 10 2017 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2017 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "uddateDetails": [
-          { "developer": "Developer-2", "time": "Mon Oct 10 2017 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
-        ],
-        "deadline": "Mon Oct 10 2027 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "deadlineDetails": [],
-        "stage": "Stage-4",
-        "stateChanged": { "Stage1": 0, "Stage2": 0, "Stage3": 0, "Stage4": 1 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2017 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
-        "assignedTo": "Developer-2"
-      },
-      {
-        "id": 19,
-        "title": "Task-19",
-        "description": "Random Description for Task-19",
-        "createdAt": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "updatedAt": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "uddateDetails": [
-          { "developer": "Developer-6", "time": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)" }
-        ],
-        "deadline": "Mon Oct 10 2024 10:42:37 GMT+0600 (Bangladesh Standard Time)",
-        "deadlineDetails": [],
-        "stage": "Stage-4",
-        "stateChanged": { "Stage1": 0, "Stage2": 0, "Stage3": 0, "Stage4": 1 },
-        "stateChangeDetails": {"time": "Mon Oct 10 2021 10:42:37 GMT+0600 (Bangladesh Standard Time)", "totalTime": 0, "hmnReadFormat": "", "info": []},
-        "assignedTo": "Developer-6"
       }
-  
     ]
   }
-  
 }

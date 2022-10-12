@@ -64,6 +64,72 @@
     </div>
     
   </v-container>
+
+  <!-- <v-container style="background-color: #E6E4E4; height:550px" >
+    <div>
+      <AddNewTask :projects="projects" :projectImportance="projectImportance" :developersJson="developersJson" :stagesJson="stagesJson" @addNewTask="addNewTask($event)"></AddNewTask>
+      <AddNewProject @newproject="newProjectDetails($event)"></AddNewProject>
+      <div style="width: 500px;"><v-select v-model="projectsToFilter" :items="projects" item-text="title" label="Filter By Projects" clearable multiple chips persistent-hint></v-select></div>
+      
+
+    </div>
+    <div class="d-flex flex-row flex-wrap justify-space-around" style="height:100%">
+
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-row align-center">
+          <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
+            Stage-1
+            <v-avatar right class="green darken-2">{{copyTask.stage1.length}}</v-avatar>
+          </v-chip>
+        </div>
+
+        <draggable class="div-container" :list="copyTask.stage1" group="tasks" @change="log($event, 1)">
+          <SingleTask v-for="(task, index) in copyTask.stage1" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage1'" @updateData="updateData($event)"></SingleTask>
+        </draggable>
+      </div>
+
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-row align-center">
+          <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
+            Stage-2
+            <v-avatar right class="green darken-2">{{copyTask.stage2.length}}</v-avatar>
+          </v-chip>
+        </div>
+
+        <draggable class="div-container" :list="copyTask.stage2" group="tasks" @change="log($event, 2)">
+          <SingleTask v-for="(task, index) in copyTask.stage2" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage2'" @updateData="updateData($event)"></SingleTask>
+        </draggable>
+      </div>
+
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-row align-center">
+          <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
+            Stage-3
+            <v-avatar right class="green darken-2">{{copyTask.stage3.length}}</v-avatar>
+          </v-chip>
+        </div>
+
+        <draggable class="div-container" :list="copyTask.stage3" group="tasks" @change="log($event, 3)">
+          <SingleTask v-for="(task, index) in copyTask.stage3" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage3'" @updateData="updateData($event)"></SingleTask>
+        </draggable>
+      </div>
+
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-row align-center">
+          <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
+            Stage-4
+            <v-avatar right class="green darken-2">{{copyTask.stage4.length}}</v-avatar>
+          </v-chip>
+        </div>
+
+        <draggable class="div-container" :list="copyTask.stage4" group="tasks" @change="log($event, 4)">
+          <SingleTask v-for="(task, index) in copyTask.stage4" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage4'" @updateData="updateData($event)"></SingleTask>
+        </draggable>
+      </div>
+    
+    </div>
+    
+  </v-container> -->
 </template>
 
 <script>
@@ -84,8 +150,11 @@ export default {
       projectImportance: JSON.parse(JSON.stringify(importanceLevel)).data,
       developersJson: JSON.parse(JSON.stringify(developersJson)).data,
       stagesJson: JSON.parse(JSON.stringify(stagesJson)).data,
+
       tasks: JSON.parse(JSON.stringify(taskJson)).data,
+      // copyTask: JSON.parse(JSON.stringify(taskJson)).data,
       lastId: JSON.parse(JSON.stringify(taskJson)).lastId,
+
       stateChanged: [],
       // stage: '',
       projectsToFilter: [],
@@ -105,6 +174,7 @@ export default {
           temOb.stateChangeDetails.time = rightNow
         }
         this.stateChanged = []
+        // this.copyTask = {...this.tasks}
       }
     },
     projectsToFilter: function(){
@@ -162,6 +232,8 @@ export default {
       else key = "stage4"
       let afterDelete = this.tasks[key].filter(task => task.id != item.id)
       this.tasks[key] = afterDelete
+
+      // this.copyTask = {...this.tasks}
     },
     updateData(data){
       console.log('data data ', data)
@@ -207,6 +279,7 @@ export default {
           }
         }
       })
+      // this.copyTask = {...this.tasks}
     },
     addNewTask(task){
 
@@ -244,6 +317,8 @@ export default {
       else if(task.stage == 'Stage-2') { this.tasks.stage2.push(newTask)}
       else if(task.stage == 'Stage-3') { this.tasks.stage3.push(newTask)}
       else if(task.stage == 'Stage-4') { this.tasks.stage4.push(newTask)}
+
+      // this.copyTask = {...this.tasks}
     },
     newProjectDetails(newProject){
       this.projects.push({...newProject, ...{id: this.projectsId}})

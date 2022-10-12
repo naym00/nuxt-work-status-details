@@ -17,7 +17,7 @@
         },
         "importance": {"level": "Medium", "color": "primary"},
         "uddateDetails": [
-          { "developer": "Developer-1", "time": "2022-09-25 11:48:20 AM" }
+          { "developer": "Developer-1", "startTime": "2022-09-25 11:48:20 AM", "endTime": "", "duration": "" }
         ],
         "deadline": "2022-12-25 11:48:20 AM",
         "deadlineDetails": [],
@@ -46,7 +46,7 @@
         },
         "importance": {"level": "High", "color": "red"},
         "uddateDetails": [
-          { "developer": "Developer-2", "time": "2022-08-12 11:48:20 AM" }
+          { "developer": "Developer-2", "startTime": "2022-08-12 11:48:20 AM", "endTime": "", "duration": "" }
         ],
         "deadline": "2022-11-12 11:48:20 AM",
         "deadlineDetails": [],
@@ -77,7 +77,7 @@
         },
         "importance": {"level": "Low", "color": "secondary"},
         "uddateDetails": [
-          { "developer": "Developer-2", "time": "2022-11-02 11:48:20 AM" }
+          { "developer": "Developer-2", "startTime": "2022-11-02 11:48:20 AM", "endTime": "", "duration": "" }
         ],
         "deadline": "2023-02-25 11:48:20 AM",
         "deadlineDetails": [],
@@ -106,7 +106,7 @@
         },
         "importance": {"level": "High", "color": "red"},
         "uddateDetails": [
-          { "developer": "Developer-3", "time": "2022-05-27 11:48:20 AM" }
+          { "developer": "Developer-3", "startTime": "2022-05-27 11:48:20 AM", "endTime": "", "duration": "" }
         ],
         "deadline": "2022-10-27 11:48:20 AM",
         "deadlineDetails": [],
@@ -137,7 +137,7 @@
         },
         "importance": {"level": "Medium", "color": "primary"},
         "uddateDetails": [
-          { "developer": "Developer-4", "time": "2022-09-16 11:48:20 AM" }
+          { "developer": "Developer-4", "startTime": "2022-09-16 11:48:20 AM", "endTime": "", "duration": "" }
         ],
         "deadline": "2023-01-11 11:48:20 AM",
         "deadlineDetails": [],
@@ -166,7 +166,7 @@
         },
         "importance": {"level": "Low", "color": "secondary"},
         "uddateDetails": [
-          { "developer": "Developer-1", "time": "2022-10-11 10:48:20 AM" }
+          { "developer": "Developer-1", "startTime": "2022-10-11 10:48:20 AM", "endTime": "", "duration": "" }
         ],
         "deadline": "2023-05-11 10:48:20 AM",
         "deadlineDetails": [],
@@ -195,7 +195,7 @@
         },
         "importance": {"level": "High", "color": "red"},
         "uddateDetails": [
-          { "developer": "Developer-4", "time": "2022-10-08 10:48:20 AM" }
+          { "developer": "Developer-4", "startTime": "2022-10-08 10:48:20 AM", "endTime": "", "duration": "" }
         ],
         "deadline": "2023-01-27 10:48:20 AM",
         "deadlineDetails": [],
@@ -226,7 +226,7 @@
         },
         "importance": {"level": "Medium", "color": "primary"},
         "uddateDetails": [
-          { "developer": "Developer-4", "time": "2022-05-08 10:48:20 AM" }
+          { "developer": "Developer-4", "startTime": "2022-05-08 10:48:20 AM", "endTime": "", "duration": "" }
         ],
         "deadline": "2022-12-29 10:48:20 AM",
         "deadlineDetails": [],
@@ -255,7 +255,7 @@
         },
         "importance": {"level": "Low", "color": "secondary"},
         "uddateDetails": [
-          { "developer": "Developer-3", "time": "2022-05-10 10:48:20 AM" }
+          { "developer": "Developer-3", "startTime": "2022-05-10 10:48:20 AM", "endTime": "", "duration": "" }
         ],
         "deadline": "2022-12-10 11:48:20 AM",
         "deadlineDetails": [],
@@ -284,7 +284,7 @@
         },
         "importance": {"level": "High", "color": "red"},
         "uddateDetails": [
-          { "developer": "Developer-4", "time": "2022-08-07 10:48:20 AM" }
+          { "developer": "Developer-4", "startTime": "2022-08-07 10:48:20 AM", "endTime": "", "duration": "" }
         ],
         "deadline": "2023-01-19 10:48:20 AM",
         "deadlineDetails": [],

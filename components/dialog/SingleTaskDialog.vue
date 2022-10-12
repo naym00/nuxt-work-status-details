@@ -83,10 +83,14 @@
 
         <div v-if="item.stateChangeDetails.info.length" class="d-flex flex-column">
           <div><b class="display-1 centerInDiv">Table To Details</b></div>
-          <div><DataTable :headers="[{text: 'Developer', value: 'developer' },{text: 'Stage', value: 'switch' },{ text: 'Duration', value: 'duration' }]" :items="item.stateChangeDetails.info"></DataTable></div>
+          <!-- <div><DataTable :headers="[{text: 'Developer', value: 'developer' },{text: 'Stage', value: 'switch' },{ text: 'Duration', value: 'duration' }]" :items="item.stateChangeDetails.info"></DataTable></div> -->
+          <div><TableComponent :headers="['Developer', 'Stage', 'Duration']" :keys="['developer', 'switch', 'duration']" :data="item.stateChangeDetails.info"></TableComponent></div>
           
           <div><b style="font-size: 20px;" class="centerInDiv">{{item.stateChangeDetails.hmnReadFormat}}</b></div>
         </div>
+        <br><br><br>
+        <!-- <div><DataTable :headers="[{text: 'Developer', value: 'developer' },{text: 'Time', value: 'time' }]" :items="item.uddateDetails"></DataTable></div> -->
+        <div><TableComponent :headers="['Developer', 'Start Time', 'End Time', 'Taken Time']" :keys="['developer', 'startTime', 'endTime', 'duration']" :data="item.uddateDetails"></TableComponent></div>
         
         
 

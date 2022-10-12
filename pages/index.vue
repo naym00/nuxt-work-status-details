@@ -1,117 +1,10 @@
 <template>
   <v-container style="background-color: #E6E4E4; height:550px" >
     <div>
-
-      <v-dialog v-model="dialog" max-width="600px">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn v-bind="attrs" v-on="on">New Task<v-icon>mdi-plus</v-icon></v-btn>
-        </template>
-
-        <v-card>
-          <v-card-title><span class="text-h5">New Task</span></v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-row>
-
-                <v-col cols="12" sm="4">
-                  <v-text-field v-model="title" label="Task Title*" required></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="4">
-                  <v-select v-model="projectId" item-value="id" :items="projects" item-text="title" label="Select Project"></v-select>
-                </v-col>
-                <v-col cols="12" sm="4">
-                  <v-select v-model="importanceId" item-value="id" :items="projectImportance" item-text="level" label="Importance Level"></v-select>
-                </v-col>
-
-
-
-                <v-col cols="12">
-                  <v-text-field v-model="description" label="Description*" required></v-text-field>
-                </v-col>
-
-                <v-col cols="12" sm="4">
-                    <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date" transition="scale-transition" offset-y min-width="auto">
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-text-field v-model="date" label="Set Deadline" prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-text-field>
-                        </template>
-                        <v-date-picker v-model="date" no-title scrollable>
-                        <v-spacer></v-spacer>
-                        <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                        <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-                        </v-date-picker>
-                    </v-menu>
-                </v-col>
-
-                <v-col cols="12" sm="4">
-                  <v-select v-model="developer" :items="developersJson" item-text="developer" label="Select Developer" required></v-select>
-                </v-col>
-
-                <v-col cols="12" sm="4">
-                  <v-select v-model="stage" :items="stagesJson" item-text="stage" label="Select Stage" required></v-select>
-                </v-col>
-
-              </v-row>
-            </v-container>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-            <v-btn color="blue darken-1" text @click="addNewTask()">Save</v-btn>
-          </v-card-actions>
-
-        </v-card>
-      </v-dialog>
-
+      <AddNewTask :projects="projects" :projectImportance="projectImportance" :developersJson="developersJson" :stagesJson="stagesJson" @addNewTask="addNewTask($event)"></AddNewTask>
       <AddNewProject @newproject="newProjectDetails($event)"></AddNewProject>
-      <TaskEditDialog></TaskEditDialog>
-
-
-      <v-dialog v-model="dialog2" max-width="600px">
-        <v-card>
-          <v-card-title><span class="text-h5">Update Task</span></v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field v-model="updateTitle" label="Task Title*" required></v-text-field>
-                </v-col>
-
-                <v-col cols="12">
-                  <v-text-field v-model="updateDescription" label="Description*" required></v-text-field>
-                </v-col>
-
-                <v-col cols="12" sm="6">
-                    <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" :return-value.sync="date" transition="scale-transition" offset-y min-width="auto">
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-text-field v-model="updateDate" label="Set Deadline" prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-text-field>
-                        </template>
-                        <v-date-picker v-model="updateDate" no-title scrollable>
-                        <v-spacer></v-spacer>
-                        <v-btn text color="primary" @click="menu2 = false">Cancel</v-btn>
-                        <v-btn text color="primary" @click="$refs.menu2.save(updateDate)">OK</v-btn>
-                        </v-date-picker>
-                    </v-menu>
-                </v-col>
-
-                <v-col cols="12" sm="6">
-                  <v-select v-model="updateDeveloper" :items="['Developer-1', 'Developer-2', 'Developer-3', 'Developer-4']" label="Select Developer" required></v-select>
-                </v-col>
-
-              </v-row>
-            </v-container>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog2 = false">Close</v-btn>
-            <v-btn color="blue darken-1" text @click="updateTask_()">Save</v-btn>
-          </v-card-actions>
-
-        </v-card>
-      </v-dialog>
-
-
+      <div style="width: 500px;"><v-select v-model="projectsToFilter" :items="projects" item-text="title" label="Filter By Projects" clearable multiple chips persistent-hint></v-select></div>
+      
 
     </div>
     <div class="d-flex flex-row flex-wrap justify-space-around" style="height:100%">
@@ -124,11 +17,8 @@
           </v-chip>
         </div>
 
-        
-
-
         <draggable class="div-container" :list="tasks.stage1" group="tasks" @change="log($event, 1)">
-          <SingleTask v-for="(task, index) in tasks.stage1" :key="index" :item="task" @deleteTask="deleteTask($event)" @updateTask="updateTask($event)"></SingleTask>
+          <SingleTask v-for="(task, index) in tasks.stage1" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage1'" @updateData="updateData($event)"></SingleTask>
         </draggable>
       </div>
 
@@ -141,7 +31,7 @@
         </div>
 
         <draggable class="div-container" :list="tasks.stage2" group="tasks" @change="log($event, 2)">
-          <SingleTask v-for="(task, index) in tasks.stage2" :key="index" :item="task" @deleteTask="deleteTask($event)"></SingleTask>
+          <SingleTask v-for="(task, index) in tasks.stage2" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage2'" @updateData="updateData($event)"></SingleTask>
         </draggable>
       </div>
 
@@ -154,20 +44,20 @@
         </div>
 
         <draggable class="div-container" :list="tasks.stage3" group="tasks" @change="log($event, 3)">
-          <SingleTask v-for="(task, index) in tasks.stage3" :key="index" :item="task" @deleteTask="deleteTask($event)"></SingleTask>
+          <SingleTask v-for="(task, index) in tasks.stage3" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage3'" @updateData="updateData($event)"></SingleTask>
         </draggable>
       </div>
 
       <div class="d-flex flex-column">
         <div class="d-flex flex-row align-center">
           <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
-            Stage-3
+            Stage-4
             <v-avatar right class="green darken-2">{{tasks.stage4.length}}</v-avatar>
           </v-chip>
         </div>
 
         <draggable class="div-container" :list="tasks.stage4" group="tasks" @change="log($event, 4)">
-          <SingleTask v-for="(task, index) in tasks.stage4" :key="index" :item="task" @deleteTask="deleteTask($event)"></SingleTask>
+          <SingleTask v-for="(task, index) in tasks.stage4" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage4'" @updateData="updateData($event)"></SingleTask>
         </draggable>
       </div>
     
@@ -184,7 +74,6 @@ import developersJson from '~/static/json/developersJson.json'
 import stagesJson from '~/static/json/stagesJson.json'
 import draggable from "vuedraggable";
 import moment from "moment"
-
 export default {
   name: 'IndexPage',
   components: { draggable },
@@ -192,34 +81,14 @@ export default {
     return {
       projects: JSON.parse(JSON.stringify(projectsJson)).data,
       projectsId: JSON.parse(JSON.stringify(projectsJson)).nextId,
-
       projectImportance: JSON.parse(JSON.stringify(importanceLevel)).data,
       developersJson: JSON.parse(JSON.stringify(developersJson)).data,
       stagesJson: JSON.parse(JSON.stringify(stagesJson)).data,
       tasks: JSON.parse(JSON.stringify(taskJson)).data,
       lastId: JSON.parse(JSON.stringify(taskJson)).lastId,
       stateChanged: [],
-
-      dialog: false,
-      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      title: '',
-      projectId: -1,
-      importanceId: -1,
-      description: '',
-      developer: '',
-      stage: '',
-      menu: false,
-
-
-      dialog2: false,
-      updateDate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      updateTitle: '',
-      updateDescription: '',
-      updateDeveloper: '',
-      // updateStage: '',
-      menu2: false,
-
-      itemToUpdate: null,
+      // stage: '',
+      projectsToFilter: [],
     }
   },
   watch:{
@@ -227,22 +96,64 @@ export default {
       if(this.stateChanged.length == 2){
         if(this.stateChanged[0]["added"] !== undefined){
           let temOb = this.stateChanged[0].added.element
-
           temOb.stage = `Stage-${this.stateChanged[0].stage}`
           temOb.stateChanged[`Stage${this.stateChanged[0].stage}`] += 1
-
           let rightNow = moment().format('YYYY-MM-D h:mm:ss A')
-          temOb.stateChangeDetails.totalTime += moment.duration(moment(rightNow).diff(moment(temOb.stateChangeDetails.time))).asSeconds()
+          temOb.stateChangeDetails.totalTime += this.calculateDurationInSecond(rightNow, temOb.stateChangeDetails.time)
           temOb.stateChangeDetails.hmnReadFormat = this.convertToDuration(temOb.stateChangeDetails.totalTime)
-          temOb.stateChangeDetails.info.push({developer: temOb.assignedTo, switch: `Stage-${this.stateChanged[1].stage} -- Stage-${this.stateChanged[0].stage}`, duration: this.timeDifference(rightNow, temOb.stateChangeDetails.time, true)})
+          temOb.stateChangeDetails.info.push({developer: temOb.assignedTo, switch: `Stage-${this.stateChanged[1].stage} -Stage- ${this.stateChanged[0].stage}`, duration: this.convertToDuration(this.calculateDurationInSecond(rightNow, temOb.stateChangeDetails.time))})
           temOb.stateChangeDetails.time = rightNow
         }
         this.stateChanged = []
       }
+    },
+    projectsToFilter: function(){
+      if(this.projectsToFilter.length == 0){
+        this.projects = JSON.parse(JSON.stringify(projectsJson)).data
+      }
+      else{
+        let stage1 = this.tasks.stage1.filter(task => {
+          this.projectsToFilter.filter(project => {
+            if(task.project.title == project ){
+              return task
+            }
+          })
+          
+        })
+        let stage2 = this.tasks.stage2.filter(task => {
+          this.projectsToFilter.filter(project => {
+            if(task.project.title == project ){
+              return task
+            }
+          })
+          
+        })
+        let stage3 = this.tasks.stage3.filter(task => {
+          this.projectsToFilter.filter(project => {
+            if(task.project.title == project ){
+              return task
+            }
+          })
+          
+        })
+        let stage4 = this.tasks.stage4.filter(task => {
+          this.projectsToFilter.filter(project => {
+            if(task.project.title == project ){
+              return task
+            }
+          })
+          
+        })
+        this.tasks = {
+          stage1: stage1,
+          stage2: stage2,
+          stage3: stage3,
+          stage4: stage4
+        }
+      }
     }
   },
   methods:{
-
     deleteTask(item){
       let key = ""
       if(item.stage == "Stage-1") key = "stage1"
@@ -252,102 +163,92 @@ export default {
       let afterDelete = this.tasks[key].filter(task => task.id != item.id)
       this.tasks[key] = afterDelete
     },
-    updateTask_(){
-      console.log(this.updateDate)
-
-      // let key = ""
-      // if(this.updateDate.stage == "Stage-1") key = "stage1"
-      // else if(this.updateDate.stage == "Stage-2") key = "stage2"
-      // else if(this.updateDate.stage == "Stage-3") key = "stage3"
-      // else key = "stage4"
-
-      // console.log(key)
-
-      // let formatedDateDeadline =  `${(new Date(this.date)).toString().split('+')[0]}+0600 (Bangladesh Standard Time)`
-      // let createdTime = new Date(this.getDateTime())
-      // let newTask = {
-      //                   id: `${this.lastIndex}`,
-      //                   title: `${this.title}`,
-      //                   description: `${this.description}`,
-      //                   createdAt: `${createdTime}`,
-      //                   updatedAt: `${createdTime}`,
-      //                   uddateDetails: [
-      //                     { developer: `${this.developer}`, time: `${createdTime}` }
-      //                   ],
-      //                   deadline: `${formatedDateDeadline}`,
-      //                   deadlineDetails: [],
-      //                   stage: `${this.stage}`,
-      //                   stateChanged: { Stage1: `${this.stage == 'Stage-1' ? 1 : 0}`, Stage2: `${this.stage == 'Stage-2' ? 1 : 0}`, Stage3: `${this.stage == 'Stage-3' ? 1 : 0}`, Stage4: `${this.stage == 'Stage-4' ? 1 : 0}` },
-      //                   stateChangeDetails: {time: `${createdTime}`, totalTime: 0, hmnReadFormat: "", info: []},
-      //                   assignedTo: `${this.developer}`
-      //                 }
-
-      console.log('updateDate ', this.updateDate)
-      console.log('updateTitle ', this.updateTitle)
-      console.log('updateDescription ', this.updateDescription)
-      console.log('updateDeveloper ', this.updateDeveloper)
-      // console.log('updateStage ', this.updateStage)
-
-      this.dialog2 = false
-    },
-
-    updateTask(item){
-      this.dialog2 = true
-      this.itemToUpdate = item
-    },
-
-    addNewTask(){
+    updateData(data){
+      console.log('data data ', data)
       let rightNow = moment().format('YYYY-MM-D h:mm:ss A')
+      
+      let selectedImportance = {}
+      if(data.importanceId != null){
+        this.projectImportance.forEach(importance => {
+          if(importance.id == data.importanceId) selectedImportance = importance
+        })
 
+      }
+      this.tasks[data.stage].forEach(task => {
+        if(task.id == data.id){
+          if(data.title != task.title) task.title = data.title
+          if(data.description != task.title) data.description = task.title
+
+          if(Object.keys(selectedImportance).length) if(selectedImportance.level != task.importance.level) task.importance = selectedImportance
+
+          if(data.developer != null){
+
+            if(data.developer != task.assignedTo){
+              task.updatedAt = rightNow
+              task.uddateDetails[task.uddateDetails.length - 1].endTime = rightNow
+              let durationInSeconds= this.calculateDurationInSecond(rightNow, task.uddateDetails[task.uddateDetails.length - 1].startTime)
+              task.uddateDetails[task.uddateDetails.length - 1].duration = this.convertToDuration(durationInSeconds)
+              task.uddateDetails.push({ developer: data.developer, startTime: rightNow, endTime: "", duration: "" })
+              task.assignedTo = data.developer
+            }
+          }
+          if(data.hour != null || data.minute != null){
+            let seconds = 0
+            if(data.hour != null) seconds += data.hour*60*60
+            if(data.minute != null) seconds += data.minute*60
+            if(task.stateChangeDetails.info.length){
+              let inSeconds = this.convertStringDurationToSeconds(task.stateChangeDetails.info[task.stateChangeDetails.info.length-1].duration)
+              task.stateChangeDetails.totalTime -= inSeconds
+              task.stateChangeDetails.totalTime += seconds
+              task.stateChangeDetails.hmnReadFormat = this.convertToDuration(task.stateChangeDetails.totalTime)
+              task.stateChangeDetails.info[task.stateChangeDetails.info.length-1].duration = this.convertToDuration(seconds)
+              task.stateChangeDetails.time = rightNow
+            }
+          }
+        }
+      })
+    },
+    addNewTask(task){
+
+      let rightNow = moment().format('YYYY-MM-D h:mm:ss A')
       let selectedProject = {}
       this.projects.forEach(project => {
-        if(project.id == this.projectId) selectedProject = project
+        if(project.id == task.projectId) selectedProject = project
       })
 
       let selectedImportance = {}
       this.projectImportance.forEach(importance => {
-        if(importance.id == this.importanceId) selectedImportance = importance
+        if(importance.id == task.importanceId) selectedImportance = importance
       })
-
-      // let selectedProject = this.findObject(this.projects, 'id', this.projectId)
-      // let selectedImportance = this.projectImportance(this.projects, 'id', this.importanceId)
-
     
       let newTask = {
                         id: `${this.lastId}`,
-                        title: `${this.title}`,
-                        description: `${this.description}`,
+                        title: `${task.title}`,
+                        description: `${task.description}`,
                         createdAt: `${rightNow}`,
                         updatedAt: `${rightNow}`,
-
                         project: selectedProject,
                         importance: selectedImportance,
-
                         uddateDetails: [
-                          { developer: `${this.developer}`, time: `${rightNow}` }
+                          { developer: `${task.developer}`, startTime: `${rightNow}`, endTime: "", duration: "" }
                         ],
-                        deadline: `${this.date} 11:59:59 PM`,
+                        deadline: `${task.date} 11:59:59 PM`,
                         deadlineDetails: [],
-                        stage: `${this.stage}`,
-                        stateChanged: { Stage1: `${this.stage == 'Stage-1' ? 1 : 0}`, Stage2: `${this.stage == 'Stage-2' ? 1 : 0}`, Stage3: `${this.stage == 'Stage-3' ? 1 : 0}`, Stage4: `${this.stage == 'Stage-4' ? 1 : 0}` },
+                        stage: `${task.stage}`,
+                        stateChanged: { Stage1: task.stage == 'Stage-1' ? 1 : 0, Stage2: task.stage == 'Stage-2' ? 1 : 0, Stage3: task.stage == 'Stage-3' ? 1 : 0, Stage4: task.stage == 'Stage-4' ? 1 : 0 },
                         stateChangeDetails: {time: `${rightNow}`, totalTime: 0, hmnReadFormat: "", info: []},
-                        assignedTo: `${this.developer}`
+                        assignedTo: `${task.developer}`
                       }
-      
       this.lastId += 1
-      if(this.stage == 'Stage-1') { this.tasks.stage1.push(newTask)}
-      else if(this.stage == 'Stage-2') { this.tasks.stage2.push(newTask)}
-      else if(this.stage == 'Stage-3') { this.tasks.stage3.push(newTask)}
-      else if(this.stage == 'Stage-4') { this.tasks.stage4.push(newTask)}
-
-      this.dialog = false
-      
+      if(task.stage == 'Stage-1') { this.tasks.stage1.push(newTask)}
+      else if(task.stage == 'Stage-2') { this.tasks.stage2.push(newTask)}
+      else if(task.stage == 'Stage-3') { this.tasks.stage3.push(newTask)}
+      else if(task.stage == 'Stage-4') { this.tasks.stage4.push(newTask)}
     },
     newProjectDetails(newProject){
       this.projects.push({...newProject, ...{id: this.projectsId}})
       this.projectsId += 1
     },
-
     // findObject(object, key, toCompare){
     //   let selectedobject = {}
     //   object.forEach(item => {
@@ -355,14 +256,32 @@ export default {
     //   })
     //   return selectedobject
     // },
-
-    timeDifference(date1, date2, flag){
-      let secondsDifference =((new Date(date1)).getTime() - (new Date(date2)).getTime()) / 1000;
-      if(flag) return this.convertToDuration(secondsDifference)
-      else return secondsDifference
-    },
     convertToDuration(totalSeconds){
         let duration = ''
+
+
+        // let time = [60, 60, 24, 365]
+        // let timeStr = ['munites', 'hours', 'days', 'years']
+
+
+        
+        // time.forEach(() => {
+        //   let multiplyValue = time.reduce( (a, b) => a * b )
+        //   if(multiplyValue >= totalSeconds){
+        //     let dividedValue = parseInt(totalSeconds/multiplyValue)
+        //     duration += `${dividedValue} ${timeStr[timeStr.length - 1]} `
+        //     totalSeconds = totalSeconds - dividedValue*multiplyValue
+        //     time.pop()
+        //     timeStr.pop()
+        //   }
+        //   else{
+        //     time.pop()
+        //     timeStr.pop()
+        //   }
+        // })
+        // duration += `${totalSeconds} seconds`
+
+
         if(totalSeconds>=(365*24*60*60)){
             let year = parseInt(totalSeconds/(365*24*60*60))
             totalSeconds = totalSeconds - year*(365*24*60*60)
@@ -383,27 +302,43 @@ export default {
             totalSeconds = totalSeconds - munite*(60)
             duration += `${munite} munites `
         }
-        duration += `${totalSeconds} seconds`
+
+        if(totalSeconds != 0) duration += `${totalSeconds} seconds`
         
         return duration
     },
-    getDateTime(){
-      let today = new Date()
-      return today.toLocaleString()
+    convertStringDurationToSeconds(strDuration){
+      // Input Type
+      // '17 days 2 hours 47 munites 44 seconds'
+
+      let timeNumbers = strDuration.split(' ').filter(item => item == parseInt(item)).map(Number)
+      let timeString = strDuration.split(' ').filter(item => item != parseInt(item))
+      let seconds = 0
+      timeString.forEach((item, index) => {
+          if(item == 'years') seconds += timeNumbers[index]*365*24*60*60
+          else if(item == 'days') seconds += timeNumbers[index]*24*60*60
+          else if(item == 'hours') seconds += timeNumbers[index]*60*60
+          else if(item == 'munites') seconds += timeNumbers[index]*60
+          else if(item == 'seconds') seconds += timeNumbers[index]
+      })
+      return seconds
+    },
+    calculateDurationInSecond(startTime, endTime){
+      // Input Type 
+      // 2022-10-12 11:27:56 AM    2022-09-25 11:48:20 AM
+      return moment.duration(moment(startTime).diff(moment(endTime))).asSeconds()
     },
     log(event, stage) {
       if(event["added"] !== undefined) this.stateChanged.push({added:  event.added, stage: stage})
       else this.stateChanged.push({removed:  event.removed, stage: stage})
-      },
+    },
   }
 }
 </script>
-
 <style scoped lang="scss">
 .div-container{
   width: 250px;
   min-height: 470px;
   margin: 10px; 
-  // background-color:#dce3da;
 }
 </style>

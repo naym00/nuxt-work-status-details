@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" v-on="on">New Project<v-icon>mdi-plus</v-icon></v-btn>
+        <v-btn style="width:100%;" v-bind="attrs" v-on="on">New Project<v-icon>mdi-plus</v-icon></v-btn>
       </template>
 
       <v-card>

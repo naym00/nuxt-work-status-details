@@ -3,10 +3,10 @@
     <div>
       <v-row>
         <v-col cols="12" md="2">
-          <AddNewTask :projects="projects" :projectImportance="projectImportance" :developersJson="developersJson" :stagesJson="stagesJson" @addNewTask="addNewTask($event)"></AddNewTask>
+          <new-task :projects="projects" :projectImportance="projectImportance" :developersJson="developersJson" :stagesJson="stagesJson" @addNewTask="addNewTask($event)"></new-task>
         </v-col>
         <v-col cols="12" md="2">
-          <AddNewProject @newproject="newProjectDetails($event)"></AddNewProject>
+          <new-project @newproject="newProjectDetails($event)"></new-project>
         </v-col>
         <v-col cols="12" md="4">
           <v-select style="margin: 0; padding: 0; width: 100%;" v-model="projectsToFilter" :items="projects" item-text="title" label="Filter By Projects" clearable multiple chips persistent-hint></v-select>
@@ -16,59 +16,19 @@
         </v-col>
       </v-row>
       
-
     </div>
     <div class="d-flex flex-row flex-wrap justify-space-around" style="height:100%">
 
-      <div class="d-flex flex-column">
+      <div class="d-flex flex-column" v-for="(stage, index) in Object.keys(this.copyTask)" :key="index">
         <div class="d-flex flex-row align-center">
           <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
-            Stage-1
-            <v-avatar right class="green darken-2">{{tasks.stage1.length}}</v-avatar>
+            Stage-{{index+1}}
+            <v-avatar right class="green darken-2">{{tasks[stage].length}}</v-avatar>
           </v-chip>
         </div>
 
-        <draggable class="div-container" :list="tasks.stage1" group="tasks" @change="log($event, 1)">
-          <SingleTask v-for="(task, index) in tasks.stage1" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage1'" @updateData="updateData($event)"></SingleTask>
-        </draggable>
-      </div>
-
-      <div class="d-flex flex-column">
-        <div class="d-flex flex-row align-center">
-          <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
-            Stage-2
-            <v-avatar right class="green darken-2">{{tasks.stage2.length}}</v-avatar>
-          </v-chip>
-        </div>
-
-        <draggable class="div-container" :list="tasks.stage2" group="tasks" @change="log($event, 2)">
-          <SingleTask v-for="(task, index) in tasks.stage2" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage2'" @updateData="updateData($event)"></SingleTask>
-        </draggable>
-      </div>
-
-      <div class="d-flex flex-column">
-        <div class="d-flex flex-row align-center">
-          <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
-            Stage-3
-            <v-avatar right class="green darken-2">{{tasks.stage3.length}}</v-avatar>
-          </v-chip>
-        </div>
-
-        <draggable class="div-container" :list="tasks.stage3" group="tasks" @change="log($event, 3)">
-          <SingleTask v-for="(task, index) in tasks.stage3" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage3'" @updateData="updateData($event)"></SingleTask>
-        </draggable>
-      </div>
-
-      <div class="d-flex flex-column">
-        <div class="d-flex flex-row align-center">
-          <v-chip small style="width:90%;height: 50px;" color="light-green lighten-5 my-2">
-            Stage-4
-            <v-avatar right class="green darken-2">{{tasks.stage4.length}}</v-avatar>
-          </v-chip>
-        </div>
-
-        <draggable class="div-container" :list="tasks.stage4" group="tasks" @change="log($event, 4)">
-          <SingleTask v-for="(task, index) in tasks.stage4" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="'stage4'" @updateData="updateData($event)"></SingleTask>
+        <draggable class="div-container" :list="tasks[stage]" group="tasks" @change="log($event, index+1)">
+          <single-task v-for="(task, index) in tasks[stage]" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="stage" @updateData="updateData($event)"></single-task>
         </draggable>
       </div>
     
@@ -120,7 +80,7 @@ export default {
         this.tasksAfterFilterByProjects = {...filteredObject}
       }
       else this.tasksAfterFilterByProjects = {...this.copyTask}
-      this.merge()
+      this.merge(this.tasksAfterFilterByProjects, this.tasksAfterFilterByDevelopers)
     },
     developersToFilter: function(){
       // this.test(this.developersToFilter, 'tasksAfterFilterByDevelopers', 'assignedTo')
@@ -134,7 +94,7 @@ export default {
         this.tasksAfterFilterByDevelopers = {...filteredObject}
       }
       else this.tasksAfterFilterByDevelopers = {...this.copyTask}
-      this.merge()
+      this.merge(this.tasksAfterFilterByDevelopers, this.tasksAfterFilterByProjects)
     },
     stateChanged: function(){
       if(this.stateChanged.length == 2){
@@ -153,55 +113,52 @@ export default {
     }
   },
   methods:{
-
-    // // this.projectsToFilter, this.tasksAfterFilterByProjects
-    // test(filterArray, objectWhereToAssign, key1, key2=null){
-    //   if(filterArray.length){
-    //     let filteredObject = {stage1: [], stage2: [], stage3: [], stage4: []}
-    //     Object.keys(this.copyTask).forEach(key => {
-    //         let filterdTask = []
-    //         this.copyTask[key].forEach(task => {
-    //           if(key2!=null){if(filterArray.includes(task[key1][key2])) filterdTask.push(task)}
-    //           else {if(filterArray.includes(task[key1])) filterdTask.push(task)}
-    //           // if(filterArray.includes(task.project.title)) filterdTask.push(task)
-    //         })
-    //         filteredObject[key] = [...filterdTask]
-    //     })
-    //     if(objectWhereToAssign == 'tasksAfterFilterByProjects') this.tasksAfterFilterByProjects = {...filteredObject}
-    //     else if(objectWhereToAssign == 'tasksAfterFilterByDevelopers') this.tasksAfterFilterByDevelopers = {...filteredObject}
-    //   }
-    //   else{
-    //     if(objectWhereToAssign == 'tasksAfterFilterByProjects') this.tasksAfterFilterByProjects = {...this.copyTask}
-    //     else if(objectWhereToAssign == 'tasksAfterFilterByDevelopers') this.tasksAfterFilterByDevelopers = {...copyTask}
-    //   }
-    //   this.merge()
+    // OR Type Merge
+    // merge(){
+    //   let filteredObject = {stage1: [], stage2: [], stage3: [], stage4: []}
+    //   Object.keys(this.copyTask).forEach(key => {
+    //     let store = []
+    //     if(this.tasksAfterFilterByProjects[key]!=undefined){
+    //       this.tasksAfterFilterByProjects[key].forEach(project=> {
+    //         store.push(project)
+    //       })
+    //     }
+    //     if(this.tasksAfterFilterByDevelopers[key]!=undefined){
+    //       this.tasksAfterFilterByDevelopers[key].forEach(developer => {
+    //         let flag = 0
+    //         if(this.tasksAfterFilterByProjects[key]!=undefined){
+    //           this.tasksAfterFilterByProjects[key].forEach(project => {
+    //             if(developer.id == project.id) flag = 1
+    //           })
+    //         }
+    //         if(flag == 0) store.push(developer)
+    //       })
+    //     }
+    //     filteredObject[key] = [...store]
+    //   })
+    //   this.tasks = {...filteredObject}
     // },
 
-
-    merge(){
+    // AND Type Merge
+    merge(objectA, objectB){
       let filteredObject = {stage1: [], stage2: [], stage3: [], stage4: []}
       Object.keys(this.copyTask).forEach(key => {
         let store = []
-        if(this.tasksAfterFilterByProjects[key]!=undefined){
-          this.tasksAfterFilterByProjects[key].forEach(project=> {
-            store.push(project)
-          })
-        }
-        if(this.tasksAfterFilterByDevelopers[key]!=undefined){
-          this.tasksAfterFilterByDevelopers[key].forEach(developer => {
-            let flag = 0
-            if(this.tasksAfterFilterByProjects[key]!=undefined){
-              this.tasksAfterFilterByProjects[key].forEach(project => {
-                if(developer.id == project.id) flag = 1
+        if(objectA[key]!=undefined){
+          objectA[key].forEach(taskA=> {
+            if(objectB[key]!=undefined){
+              objectB[key].forEach(taskB => {
+                if(taskA.id == taskB.id) store.push(taskA)
               })
             }
-            if(flag == 0) store.push(developer)
+            else store.push(taskA)
           })
         }
         filteredObject[key] = [...store]
       })
       this.tasks = {...filteredObject}
     },
+
     deleteTask(item){
       let key = this.findKey(item)
       let afterDelete = this.tasks[key].filter(task => task.id != item.id)

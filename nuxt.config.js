@@ -29,8 +29,8 @@ export default {
     dirs: [
       '~/components/',
       '~/components/dialog/',
-      '~/components/table/',
-      '~/components/autocomplete/'
+      '~/components/dialog/addnew/',
+      '~/components/table/'
     ]
   },
 

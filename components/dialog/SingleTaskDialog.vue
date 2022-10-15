@@ -92,6 +92,24 @@
         <!-- <div><DataTable :headers="[{text: 'Developer', value: 'developer' },{text: 'Time', value: 'time' }]" :items="item.uddateDetails"></DataTable></div> -->
         <div><TableComponent :headers="['Developer', 'Start Time', 'End Time', 'Taken Time']" :keys="['developer', 'startTime', 'endTime', 'duration']" :data="item.uddateDetails"></TableComponent></div>
         
+
+        <div style="display: flex; flex-direction: column; margin-top: 10px;">
+          <div style="display: flex; justify-content: center; align-items: center;"><h3>Comments</h3></div>
+          <div style="width:90%; margin:auto; display: flex; flex-direction: column;">
+
+            <div v-for="(comments, index) in item.comments" :key="index">
+              <CommentComponent :comments="comments"></CommentComponent>
+              <div style="display: flex; flex-direction:row">
+                <div style="width: 10%"></div>
+                <div><v-chip x-small class="ma-2" color="primary">Reply</v-chip></div>
+                <div>
+                  <v-text-field color="purple darken-2"></v-text-field>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
         
 
         <v-card-actions>
@@ -109,6 +127,7 @@ import moment from "moment"
     props: ['item'],
     data () {
       return {
+        // commentExpand: false,
         dialog: false,
       }
     },

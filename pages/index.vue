@@ -113,32 +113,6 @@ export default {
     }
   },
   methods:{
-    // OR Type Merge
-    // merge(){
-    //   let filteredObject = {stage1: [], stage2: [], stage3: [], stage4: []}
-    //   Object.keys(this.copyTask).forEach(key => {
-    //     let store = []
-    //     if(this.tasksAfterFilterByProjects[key]!=undefined){
-    //       this.tasksAfterFilterByProjects[key].forEach(project=> {
-    //         store.push(project)
-    //       })
-    //     }
-    //     if(this.tasksAfterFilterByDevelopers[key]!=undefined){
-    //       this.tasksAfterFilterByDevelopers[key].forEach(developer => {
-    //         let flag = 0
-    //         if(this.tasksAfterFilterByProjects[key]!=undefined){
-    //           this.tasksAfterFilterByProjects[key].forEach(project => {
-    //             if(developer.id == project.id) flag = 1
-    //           })
-    //         }
-    //         if(flag == 0) store.push(developer)
-    //       })
-    //     }
-    //     filteredObject[key] = [...store]
-    //   })
-    //   this.tasks = {...filteredObject}
-    // },
-
     // AND Type Merge
     merge(objectA, objectB){
       let filteredObject = {stage1: [], stage2: [], stage3: [], stage4: []}

@@ -1,5 +1,13 @@
 <template>
     <div>
+        <div>
+            <v-row>
+                <v-col cols="12" md="10"><v-textarea v-model="newRootCmnt" rows="2" label="Add New Comment"></v-textarea></v-col>
+                <v-col cols="12" md="2"><v-btn text @click="newRootcomment()">Done</v-btn></v-col>
+            </v-row>
+            
+            
+        </div>
         <div v-for="(comment, index) in item.comments" :key="index">
             <div v-for="(singleComment, singleCommentIndex) in comment" :key="singleCommentIndex">
                 <div @click="item.comments[index][0].expand = !item.comments[index][0].expand" v-show="singleComment.type" style="display: flex; flex-direction: column;">
@@ -20,7 +28,7 @@
             <div v-show="item.comments[index][0].expand" style="display: flex; flex-direction:row">
                 <div style="width: 10%"></div>
                 <div><v-chip x-small class="ma-2" color="primary" @click="reply(index)">Reply</v-chip></div>
-                <div><v-textarea v-model="newComment" class="mx-2" rows="1"></v-textarea></div>
+                <div><v-textarea v-model="newComment" auto-grow class="mx-2" rows="1"></v-textarea></div>
             </div>
         </div>
     </div>
@@ -30,7 +38,7 @@
 import moment from "moment"
     export default {
         props: ['item'],
-        data(){return {newComment: '',}},
+        data(){return {newComment: '', newRootCmnt: ''}},
         methods:{
             getTime(date){
                 return moment(date).format('LTS')
@@ -40,13 +48,19 @@ import moment from "moment"
                 this.$emit('newComment', {
                     index: index, 
                     id: this.item.id, 
-                    stage: this.findKey(this.item), 
-                    comment: this.newComment,
-                    commentBy: 'Developer-1',
-                    time: rightNow,
-                    type: false
+                    stage: this.findKey(this.item),
+                    commentContent: {commentBy: 'Developer-1', type: false, time: rightNow, comment: this.newComment}
                 })
                 this.newComment = ''
+            },
+            newRootcomment(){
+                let rightNow = moment().format('YYYY-MM-D h:mm:ss A')
+                this.$emit('newRootcomment', {
+                    id: this.item.id,
+                    stage: this.findKey(this.item),
+                    commentContent: [{commentBy: "Developer-1", type: true, expand: false, time: rightNow, comment: this.newRootCmnt}]
+                })
+                this.newRootCmnt = ''
             },
             findKey(item){
                 if(item.stage == "Stage-1") return "stage1"

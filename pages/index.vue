@@ -28,7 +28,7 @@
         </div>
 
         <draggable class="div-container" :list="tasks[stage]" group="tasks" @change="log($event, index+1)">
-          <single-task v-for="(task, index) in tasks[stage]" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="stage" @updateData="updateData($event)" @newComment="newComment($event)"></single-task>
+          <single-task v-for="(task, index) in tasks[stage]" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="stage" @updateData="updateData($event)" @newComment="newComment($event)" @newRootcomment="newRootcomment($event)"></single-task>
         </draggable>
       </div>
     
@@ -210,7 +210,11 @@ export default {
                         stage: `${task.stage}`,
                         stateChanged: { Stage1: task.stage == 'Stage-1' ? 1 : 0, Stage2: task.stage == 'Stage-2' ? 1 : 0, Stage3: task.stage == 'Stage-3' ? 1 : 0, Stage4: task.stage == 'Stage-4' ? 1 : 0 },
                         stateChangeDetails: {time: `${rightNow}`, totalTime: 0, hmnReadFormat: "", info: []},
-                        assignedTo: `${task.developer}`
+                        assignedTo: `${task.developer}`,
+                        comments: [
+                          [{commentBy: "Developer-3", type: true, expand: false, time: "2022-05-08 01:21:25 PM", comment: "Comment 1"}, {commentBy: "Developer-4", type: false, time: "2022-05-08 01:22:00 PM", comment: "Comment 2"}, {commentBy: "Developer-3", type: false, time: "2022-05-08 01:22:15 PM", comment: "Comment 3"}], 
+
+                        ]
                       }
       this.lastId += 1
       if(task.stage == 'Stage-1') { this.tasks.stage1.push(newTask)}
@@ -233,26 +237,19 @@ export default {
         let duration = ''
 
 
-        // let time = [60, 60, 24, 365]
-        // let timeStr = ['munites', 'hours', 'days', 'years']
-
-
-        
+        // let time = [1, 1, 1, 60, 60, 24, 365]
+        // let timeStr = ['1', '1', '1', 'munites', 'hours', 'days', 'years']
         // time.forEach(() => {
         //   let multiplyValue = time.reduce( (a, b) => a * b )
-        //   if(multiplyValue >= totalSeconds){
+        //   if(multiplyValue <= totalSeconds){
         //     let dividedValue = parseInt(totalSeconds/multiplyValue)
         //     duration += `${dividedValue} ${timeStr[timeStr.length - 1]} `
         //     totalSeconds = totalSeconds - dividedValue*multiplyValue
-        //     time.pop()
-        //     timeStr.pop()
         //   }
-        //   else{
-        //     time.pop()
-        //     timeStr.pop()
-        //   }
+        //   time.pop()
+        //   timeStr.pop()
         // })
-        // duration += `${totalSeconds} seconds`
+        // if(totalSeconds != 0) duration += `${totalSeconds} seconds`
 
 
         if(totalSeconds>=(365*24*60*60)){
@@ -308,10 +305,17 @@ export default {
     newComment(commentInfo){
       this.tasks[commentInfo.stage].forEach(task => {
         if(task.id == commentInfo.id){
-          task.comments[commentInfo.index].push({commentBy: commentInfo.commentBy, type: commentInfo.type, time: commentInfo.time, comment: commentInfo.comment})
+          task.comments[commentInfo.index].push(commentInfo.commentContent)
         }
       })
     },
+    newRootcomment(rootCmnt){
+      this.tasks[rootCmnt.stage].forEach(task => {
+        if(task.id == rootCmnt.id){
+          task.comments.push(rootCmnt.commentContent)
+        }
+      })
+    }
   }
 }
 </script>

@@ -16,7 +16,7 @@
       <div class="d-flex flex-row align-center justify-space-around" style="font-size: 12px">
         <div style="width:25px;"><TaskEditDialog :id="item.id" :title="item.title" :description="item.description" :stage="stage" @updateData="updateData($event)"></TaskEditDialog></div>
         <div style="width:25px;"><v-btn icon @click="deleteTask(item)"><v-icon>mdi-delete</v-icon></v-btn></div>
-        <div style="width:15px;"><SingleTaskDialog :item="item" @newComment="newComment($event)"></SingleTaskDialog></div>
+        <div style="width:15px;"><SingleTaskDialog :item="item" @newComment="newComment($event)" @newRootcomment="newRootcomment($event)"></SingleTaskDialog></div>
       </div>
       
     </div>
@@ -43,7 +43,10 @@ export default {
       this.$emit('updateData', data)
     },
     newComment(commentInfo){
-        this.$emit('newComment', commentInfo)
+      this.$emit('newComment', commentInfo)
+    },
+    newRootcomment(rootCmnt){
+      this.$emit('newRootcomment', rootCmnt)
     }
   }
   

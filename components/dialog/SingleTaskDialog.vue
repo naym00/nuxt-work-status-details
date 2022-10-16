@@ -117,7 +117,7 @@
           <div style="width:90%; margin:auto; display: flex; flex-direction: column;">
 
 
-            <CommentComponent :item="item" @newComment="newComment($event)"></CommentComponent>
+            <CommentComponent :item="item" @newComment="newComment($event)" @newRootcomment="newRootcomment($event)"></CommentComponent>
             
           </div>
         </div>
@@ -147,6 +147,9 @@ import moment from "moment"
       },
       newComment(commentInfo){
         this.$emit('newComment', commentInfo)
+      },
+      newRootcomment(rootCmnt){
+        this.$emit('newRootcomment', rootCmnt)
       }
     }
   }

@@ -28,7 +28,7 @@
         </div>
 
         <draggable class="div-container" :list="tasks[stage]" group="tasks" @change="log($event, index+1)">
-          <single-task v-for="(task, index) in tasks[stage]" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="stage" @updateData="updateData($event)"></single-task>
+          <single-task v-for="(task, index) in tasks[stage]" :key="index" :item="task" @deleteTask="deleteTask($event)" :stage="stage" @updateData="updateData($event)" @newComment="newComment($event)"></single-task>
         </draggable>
       </div>
     
@@ -304,6 +304,13 @@ export default {
     log(event, stage) {
       if(event["added"] !== undefined) this.stateChanged.push({added:  event.added, stage: stage})
       else this.stateChanged.push({removed:  event.removed, stage: stage})
+    },
+    newComment(commentInfo){
+      this.tasks[commentInfo.stage].forEach(task => {
+        if(task.id == commentInfo.id){
+          task.comments[commentInfo.index].push({commentBy: commentInfo.commentBy, type: commentInfo.type, time: commentInfo.time, comment: commentInfo.comment})
+        }
+      })
     },
   }
 }

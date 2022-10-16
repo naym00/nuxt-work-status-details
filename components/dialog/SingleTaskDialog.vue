@@ -93,7 +93,7 @@
         <div><TableComponent :headers="['Developer', 'Start Time', 'End Time', 'Taken Time']" :keys="['developer', 'startTime', 'endTime', 'duration']" :data="item.uddateDetails"></TableComponent></div>
         
 
-        <div style="display: flex; flex-direction: column; margin-top: 10px;">
+        <!-- <div style="display: flex; flex-direction: column; margin-top: 10px;">
           <div style="display: flex; justify-content: center; align-items: center;"><h3>Comments</h3></div>
           <div style="width:90%; margin:auto; display: flex; flex-direction: column;">
 
@@ -107,6 +107,17 @@
                 </div>
               </div>
             </div>
+            
+          </div>
+        </div> -->
+
+
+        <div style="display: flex; flex-direction: column; margin-top: 10px;">
+          <div style="display: flex; justify-content: center; align-items: center;"><h3>Comments</h3></div>
+          <div style="width:90%; margin:auto; display: flex; flex-direction: column;">
+
+
+            <CommentComponent :item="item" @newComment="newComment($event)"></CommentComponent>
             
           </div>
         </div>
@@ -127,13 +138,15 @@ import moment from "moment"
     props: ['item'],
     data () {
       return {
-        // commentExpand: false,
         dialog: false,
       }
     },
     methods:{
       getDateTimeHR(dateTime){
         return moment(dateTime).format('LL')
+      },
+      newComment(commentInfo){
+        this.$emit('newComment', commentInfo)
       }
     }
   }
